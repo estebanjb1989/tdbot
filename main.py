@@ -13,10 +13,11 @@ client = Client(api_key=api_key, api_secret=api_secret,
 commandService.set_config(api_key=api_key, api_secret=api_secret)
 templates = Jinja2Templates(directory="templates/")
 
+
 def calculateTrade(threshold, quantity_btc):
     avg_price = queryService.get_avg_price(client)
     buy_limit_price = queryService.get_buy_limit_price(avg_price=avg_price,
-                                                        threshold=threshold)
+                                                       threshold=threshold)
     sell_limit_price = queryService.get_sell_limit_price(
         avg_price=avg_price, threshold=threshold)
 
@@ -54,15 +55,28 @@ def calculateTrade(threshold, quantity_btc):
     }
     return data
 
+
 @app.get("/")
 async def root(request: Request):
     result = "Calculator"
     return templates.TemplateResponse('calculator.html', context={'request': request, 'result': result})
 
+
 @app.post("/")
 def form_post(request: Request, threshold: str = Form(...), quantity_btc: str = Form(...)):
-    result = calculateTrade(threshold=float(threshold), quantity_btc=float(quantity_btc))
-    return templates.TemplateResponse('calculator.html', context={'request': request, 'result': result})
+    result = calculateTrade(threshold=float(threshold),
+                            quantity_btc=float(quantity_btc))
+    return templates.TemplateResponse('calculator.html',
+                                      context={
+                                          'request': request,
+                                          'result': result,
+                                          'threshold': threshold,
+                                          'quantity_btc': quantity_btc,
+                                          'buy_limit_price': result["buy_limit_price"],
+                                          'sell_limit_price': result["sell_limit_price"],
+                                          'final_profit_usdt': result["final_profit_usdt"]
+                                      })
+
 
 @app.get("/permissions", response_class=PrettyJSONResponse)
 async def get_permissions():

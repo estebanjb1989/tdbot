@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>TDBOT</title>
     <style>
-        .form-container {
+        .column {
             display: flex;
             flex-direction: column;
             max-width: 320px;
@@ -17,7 +17,7 @@
 </head>
 <body>
 <form method="post">
-    <div class="form-container">
+    <div class="column">
         <span>Quantity BTC</span>
         <input type="text" name="quantity_btc" value="0.0001"/>
         <div class="divider"></div>
@@ -28,7 +28,24 @@
     </div>
 </form>
 
-<p>Result: {{ result }}</p>
+<!-- <p>Result: {{ result }}</p> -->
+<div class="column">
+    <span>
+        Threshold: {{ threshold }}    
+    </span>
+    <span>
+        Quantity BTC: {{ quantity_btc }}
+    </span>
+    <span>
+        Buy limit price: {{ buy_limit_price }}
+    </span>
+    <span>
+        Sell limit price: {{ sell_limit_price }}
+    </span>
+     <span>
+        Final profit USDT: {{ final_profit_usdt }}
+    </span>
+</div>
 
 </body>
 </html>
