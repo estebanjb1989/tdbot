@@ -72,6 +72,7 @@ def form_post(request: Request, threshold: str = Form(...), quantity_btc: str = 
                                           'result': result,
                                           'threshold': threshold,
                                           'quantity_btc': quantity_btc,
+                                          'avg_price': result["avg_price"],
                                           'buy_limit_price': result["buy_limit_price"],
                                           'sell_limit_price': result["sell_limit_price"],
                                           'final_profit_usdt': result["final_profit_usdt"]
