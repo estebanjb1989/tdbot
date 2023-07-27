@@ -79,6 +79,8 @@ async def trade():
     mongoClient = MongoClient("localhost", 27017)
     db = mongoClient["tdbot"]
 
+    db.trades.delete_many({})
+
     while (balance > 0):
         threshold = 1.0005
         avg_price = queryService.get_avg_price(client)
