@@ -1,12 +1,14 @@
-# sudo bin/activate
+# Comandos
 
-# to start the api
-# uvicorn main:app --reload
+Para empezar a trabajar, se debe activar el env de python, ingresar a la carpeta env, 
+correr el siguiente comando:
+- sudo bin/activate
 
-# to publish
-# ngrok http 8000
+Para correr la api y tener hot reload activado:
+- uvicorn main:app --reload
 
-- Ordenes Market vs Limit?
+# Preguntas
+
 Las ordenes de tipo market se ejecutan instantaneamente, en cambio las de tipo limit
 se ejecutan cuando se alcanza un determinado precio, dado por el parametro price, el 
 cual calculamos previamente utilzando un threshold.
