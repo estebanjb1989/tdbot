@@ -9,21 +9,16 @@ import hmac
 import time
 from datetime import datetime
 import requests
+from config import api_key, api_secret
 
 BASE_URL = 'https://api.binance.com'
-apiKey = ''
-secret = ''
-
-def set_config(api_key, api_secret):
-    apiKey = api_key
-    secret = api_secret
 
 
 def create_sell_order_limit(quantity, limitPrice):
     PATH = '/api/v3/order'
     timestamp = int(time.time() * 1000)
     headers = {
-        'X-MBX-APIKEY': apiKey
+        'X-MBX-APIKEY': api_key
     }
     params = {
         'recvWindow': 5000,
@@ -38,43 +33,44 @@ def create_sell_order_limit(quantity, limitPrice):
         'recvWindow': 6000
     }
     query_string = urllib.parse.urlencode(params)
-    params['signature'] = hmac.new(secret.encode(
+    params['signature'] = hmac.new(api_secret.encode(
         'utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
     url = urljoin(BASE_URL, PATH)
     r = requests.post(url, headers=headers, params=params)
     dataSet = r.json()
     return dataSet
 
-def create_buy_order_market(quantity):
-    PATH = '/api/v3/order'
-    timestamp = int(time.time() * 1000)
-    headers = {
-        'X-MBX-APIKEY': apiKey
-    }
-    params = {
-        'recvWindow': 5000,
-        'timestamp': timestamp,
-        'side': "BUY",
-        'symbol': 'BTCUSDT',
-        'quantity': quantity,
-        'type': "MARKET",
-        'timeInForce': "GTC",
-        'timestamp': time.time(),
-        'recvWindow': 6000
-    }
-    query_string = urllib.parse.urlencode(params)
-    params['signature'] = hmac.new(secret.encode(
-        'utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
-    url = urljoin(BASE_URL, PATH)
-    r = requests.post(url, headers=headers, params=params)
-    dataSet = r.json()
-    return dataSet
+# def create_buy_order_market(quantity):
+#     PATH = '/api/v3/order'
+#     timestamp = int(time.time() * 1000)
+#     headers = {
+#         'X-MBX-APIKEY': apiKey
+#     }
+#     params = {
+#         'recvWindow': 5000,
+#         'timestamp': timestamp,
+#         'side': "BUY",
+#         'symbol': 'BTCUSDT',
+#         'quantity': quantity,
+#         'type': "MARKET",
+#         'timeInForce': "GTC",
+#         'timestamp': time.time(),
+#         'recvWindow': 6000
+#     }
+#     query_string = urllib.parse.urlencode(params)
+#     params['signature'] = hmac.new(secret.encode(
+#         'utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
+#     url = urljoin(BASE_URL, PATH)
+#     r = requests.post(url, headers=headers, params=params)
+#     dataSet = r.json()
+#     return dataSet
+
 
 def create_buy_order_limit(quantity, limitPrice):
     PATH = '/api/v3/order'
     timestamp = int(time.time() * 1000)
     headers = {
-        'X-MBX-APIKEY': apiKey
+        'X-MBX-APIKEY': api_key
     }
     params = {
         'recvWindow': 5000,
@@ -89,7 +85,7 @@ def create_buy_order_limit(quantity, limitPrice):
         'recvWindow': 6000
     }
     query_string = urllib.parse.urlencode(params)
-    params['signature'] = hmac.new(secret.encode(
+    params['signature'] = hmac.new(api_secret.encode(
         'utf-8'), query_string.encode('utf-8'), hashlib.sha256).hexdigest()
     url = urljoin(BASE_URL, PATH)
     r = requests.post(url, headers=headers, params=params)

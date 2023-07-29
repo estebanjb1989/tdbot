@@ -1,6 +1,6 @@
 from binance.client import Client
 from pymongo import MongoClient
-import libs.queryService as queryService
+import queryService
 import time
 from config import api_key, api_secret
 import datetime
