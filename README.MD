@@ -1,3 +1,7 @@
+# Documentacion
+
+https://python-binance.readthedocs.io/en/latest/
+
 # Comandos
 
 Para empezar a trabajar, se debe activar el env de python, ingresar a la carpeta env, 

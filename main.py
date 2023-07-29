@@ -16,7 +16,7 @@ templates = Jinja2Templates(directory="templates/")
 
 @app.get("/")
 async def root(request: Request):
-    result = "Calculator"
+    result = ""
     return templates.TemplateResponse('calculator.html', context={'request': request, 'result': result})
 
 
